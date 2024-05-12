@@ -24,13 +24,18 @@ export class MapBoxField extends Component {
 
             mapboxgl.accessToken = 'pk.eyJ1Ijoid3Nsb2gxNjAyMjAiLCJhIjoiY2x3MHZzZ2sxMDV5bjJqbDhvcmFsNmg1OCJ9.PmAFa3GJRhc-zTHuRmnYxw';
 
-            console.log('NAME :', this.props.name)
             console.log('DATA :', this.props.record.data[this.props.name]);
+            console.log('TYPE OF :', typeof this.props.name)
+
+            this.value = JSON.parse(this.props.record.data[this.props.name]);
+            console.log('VALUE :', this.value)
+
+            console.log('LAT :', typeof this.value.location.lat, typeof this.value.location.lng)
 
             const map = new mapboxgl.Map({
                 container: this.mapbox.el, // container ID
-                center: { lat: this.props.record.data.lat, lng: this.props.record.data.lng },
-                point: { lat: this.props.record.data.lat, lng: this.props.record.data.lng },
+                center: { lat: this.value.location.lat, lng: this.value.location.lng },
+                point: { lat: this.value.marker.lat, lng: this.value.marker.lng },
                 style: 'mapbox://styles/mapbox/streets-v12',
                 zoom: 15 // starting zoom
             });
@@ -40,7 +45,7 @@ export class MapBoxField extends Component {
             const marker = new mapboxgl.Marker({
                 color: 'red',
             })
-                .setLngLat({ lat: this.props.record.data.lat, lng: this.props.record.data.lng })
+                .setLngLat({ lat: this.value.marker.lat, lng: this.value.marker.lng })
                 .addTo(map);
 
 
