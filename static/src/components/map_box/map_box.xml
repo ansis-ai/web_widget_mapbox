@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="web_widget_mapbox.MapBoxField" owl="1">
+
+        <span t-esc="props.value" />
+            <div class="map" id='map' t-ref="mapbox"></div>
+    </t>
+
+</templates>
