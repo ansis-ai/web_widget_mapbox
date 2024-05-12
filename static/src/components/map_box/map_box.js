@@ -22,13 +22,12 @@ export default class MapBoxField extends Component {
 
             mapboxgl.accessToken = 'pk.eyJ1Ijoid3Nsb2gxNjAyMjAiLCJhIjoiY2x3MHZzZ2sxMDV5bjJqbDhvcmFsNmg1OCJ9.PmAFa3GJRhc-zTHuRmnYxw';
 
-            console.log('NAME :', this.props.name)
-            console.log('DATA :', this.props.record.data[this.props.name]);
+            this.value = JSON.parse(this.props.record.data[this.props.name]);
 
             const map = new mapboxgl.Map({
                 container: this.mapbox.el, // container ID
-                center: { lat: 1.3008, lng: 103.8397 },
-                point: { lat: 1.3008, lng: 103.8397 },
+                center: { lat: this.value.location.lat, lng: this.value.location.lng },
+                point: { lat: this.value.marker.lat, lng: this.value.marker.lng },
                 style: 'mapbox://styles/mapbox/streets-v12',
                 zoom: 15 // starting zoom
             });
@@ -38,7 +37,7 @@ export default class MapBoxField extends Component {
             const marker = new mapboxgl.Marker({
                 color: 'red',
             })
-                .setLngLat({ lat: 1.3008, lng: 103.8397 })
+                .setLngLat({ lat: this.value.marker.lat, lng: this.value.marker.lng })
                 .addTo(map);
 
 
